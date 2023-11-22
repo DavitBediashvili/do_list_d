@@ -1,0 +1,56 @@
+.notes{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 26px;
+    width: 40%;
+    gap: 20px;
+}
+
+.left{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+}
+
+.left h2{
+    height: auto;
+    font-weight: bold;
+}
+
+.left input{
+    width: 26px;
+    height: 26px;
+    accent-color: #6C63FF;
+  }
+
+.purple-line {
+    padding: 20px 0px;
+    border-bottom: 1px solid #6C63FF;  
+}
+  
+.right {
+    display: none;
+    height: auto;
+    width: auto;
+    gap: 10px;
+  }
+
+.right img{
+    height: 18px;
+    width: 18px;
+}
+
+.right img:hover{
+    height: 20px;
+    width: 20px;
+}
+  
+.visible {
+    display: flex;
+}
+
+.margin-top-20{
+    margin-top: 20px;
+}
