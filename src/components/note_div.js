@@ -1,11 +1,28 @@
 import './note_div.css';
 import React, { useState } from 'react';
+import Dialog from './dialog';
 const trash = require('./icons/trash.png');
 const pen = require('./icons/pen.png');
 const empty = require('./icons/empty.png');
 
 
-const Note = ({}) => {
+const Note = ({searchInput}) => {
+    const [openDialog, setOpenDialog] = useState(false);
+    const [dialogIndex, setDialogIndex] = useState(null);
+
+    const handleOpenDialog = (index) => {
+      setOpenDialog(true);
+      setDialogIndex(index);
+    };
+
+    const handleCloseDialog = () => {
+      setOpenDialog(false);
+    };
+
+
+
+
+
     let notes_list = [];
     let renderedNotes;
     const notes_list_string = localStorage.getItem('notes');
@@ -35,17 +52,18 @@ const Note = ({}) => {
 
     }else{
       notes_list = JSON.parse(notes_list_string);
-
-       renderedNotes = notes_list.map((note, index) => (
+      const filteredNotes = notes_list.filter((note) => note && note.includes(searchInput));
+       renderedNotes = filteredNotes.map((note, index) => (
         <div className='notes purple-line' key={index} onMouseEnter={() => setHovered(index)} onMouseLeave={() => setHovered(null)}>
           <div className='left'>
-            <input type="checkbox" id={`checkbox-${index}`} />
+            <input type="checkbox" id={`${index}`} />
             <h2>{note}</h2>
           </div>
           <div className={`right ${isHovered === index ? 'visible' : ''}`}>
-            <button> <img src={pen} alt="Edit" /> </button>
+            <button onClick={() => handleOpenDialog(index)}> <img src={pen} alt="Edit" /> </button>
             <button onClick={() => handleDeleteNote(index)}> <img src={trash} alt="Delete" /> </button>
           </div>
+          {openDialog && <Dialog handleClose={handleCloseDialog} what={"edit"} id={dialogIndex} />}
       </div>
       ));
     }

@@ -5,15 +5,17 @@ import Note from './components/note_div';
 const image = require('./components/icons/Sun.png');
 
 function App() {
+  const [searchInput, setSearchInput] = useState(''); 
+
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleDarkMode = () => {
     if(isDarkMode === false){
       setIsDarkMode(true); 
-      console.log(isDarkMode)
+      // console.log(isDarkMode)
     }else{
       setIsDarkMode(false); 
-      console.log(isDarkMode)
+      // console.log(isDarkMode)
     }
     
   };
@@ -36,7 +38,7 @@ function App() {
     <div className="App-header flex-center">
           <h1>TODO LIST</h1>
           <div className='search-div flex-center'>
-            <input className='border-radius' type="text" placeholder="Search note..." />
+            <input className='border-radius' type="text" placeholder="Search note..." value={searchInput}onChange={(e) => setSearchInput(e.target.value)}/>
             <select id="dropdown" name="dropdown" className='heigh-38px border-radius'>
               <option className='border-radius' value="option1">ALL</option>
               <option className='border-radius' value="option2">New</option>
@@ -48,13 +50,13 @@ function App() {
 
           </div>
         </div>
-          <Note />
+          <Note searchInput={searchInput}/>
       <div className='add-button-div flex-center'>
           <button onClick={handleOpenDialog}>+</button>
       </div>
 
 
-      {openDialog && <Dialog handleClose={handleCloseDialog} />}
+      {openDialog && <Dialog handleClose={handleCloseDialog} what={"add"}/>}
     </div>
   );
 }
